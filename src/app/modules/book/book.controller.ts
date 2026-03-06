@@ -45,8 +45,7 @@ export const createBook = async (req: Request, res: Response) => {
 };
 
 export const getSingleBook = async (req: Request, res: Response) => {
-    const bookId = req.params.id;
-    console.log("This is bookId", bookId);
+    const bookId = req.params.bookId;
 
     const book = await Book.findById(bookId);
 
@@ -58,6 +57,26 @@ export const getSingleBook = async (req: Request, res: Response) => {
     } else {
         res.status(200).json({
             message: "Book fetched successfully!",
+            success: true,
+            data: book,
+        });
+    }
+};
+
+export const updateBook = async (req: Request, res: Response) => {
+    const bookId = req.params.bookId;
+    const body = req.body;
+
+    const book = await Book.findByIdAndUpdate(bookId, body, { new: true });
+
+    if (!book) {
+        res.status(404).json({
+            message: "Book not found!",
+            success: false,
+        });
+    } else {
+        res.status(200).json({
+            message: "Book updated successfully!",
             success: true,
             data: book,
         });
