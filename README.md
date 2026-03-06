@@ -11,21 +11,22 @@ library-management-api/
 ├── src/
 │   ├── app.ts                  # Express app setup
 │   ├── server.ts               # Server entry point
-│   ├── config/
-│   │   └── db.ts               # MongoDB connection
-│   ├── modules/
-│   │   ├── book/
-│   │   │   ├── book.model.ts   # Mongoose schema + methods
-│   │   │   ├── book.controller.ts
-│   │   │   ├── book.route.ts
-│   │   │   └── book.interface.ts
-│   │   └── borrow/
-│   │       ├── borrow.model.ts
-│   │       ├── borrow.controller.ts
-│   │       ├── borrow.route.ts
-│   │       └── borrow.interface.ts
-│   └── middlewares/
-│       └── errorHandler.ts     # Global error handler
+│   └── app/
+│       ├── config/
+│       │   └── db.ts               # MongoDB connection
+│       ├── modules/
+│       │   ├── book/
+│       │   │   ├── book.model.ts   # Mongoose schema + methods
+│       │   │   ├── book.controller.ts
+│       │   │   ├── book.route.ts
+│       │   │   └── book.interface.ts
+│       │   └── borrow/
+│       │       ├── borrow.model.ts
+│       │       ├── borrow.controller.ts
+│       │       ├── borrow.route.ts
+│       │       └── borrow.interface.ts
+│       └── middlewares/
+│           └── errorHandler.ts     # Global error handler
 ├── .env
 ├── .env.example
 ├── tsconfig.json
