@@ -356,13 +356,13 @@ BorrowModel.aggregate([
 ## 📋 Project Checklist
 
 - [x] TypeScript + Express + Mongoose setup
-- [ ] Book model with full validation
+- [x] Book model with full validation
 - [ ] Borrow model with validation
-- [ ] `POST /api/books` — Create book
-- [ ] `GET /api/books` — Get all books with filter/sort/limit
-- [ ] `GET /api/books/:bookId` — Get single book
-- [ ] `PUT /api/books/:bookId` — Update book
-- [ ] `DELETE /api/books/:bookId` — Delete book
+- [x] `POST /api/books` — Create book
+- [x] `GET /api/books` — Get all books with filter/sort/limit
+- [x] `GET /api/books/:bookId` — Get single book
+- [x] `PUT /api/books/:bookId` — Update book
+- [x] `DELETE /api/books/:bookId` — Delete book
 - [ ] `POST /api/borrow` — Borrow a book (with business logic)
 - [ ] `GET /api/borrow` — Aggregation summary
 - [ ] Mongoose static or instance method (availability update)
