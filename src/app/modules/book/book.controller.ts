@@ -82,3 +82,21 @@ export const updateBook = async (req: Request, res: Response) => {
         });
     }
 };
+
+export const deleteBook = async (req: Request, res: Response) => {
+    const bookId = req.params.bookId;
+
+    const book = await Book.findByIdAndDelete(bookId);
+
+    if (!book) {
+        res.status(404).json({
+            message: "Book not found!",
+            success: false,
+        });
+    } else {
+        res.status(200).json({
+            message: "Book deleted successfully!",
+            success: true,
+        });
+    }
+};
