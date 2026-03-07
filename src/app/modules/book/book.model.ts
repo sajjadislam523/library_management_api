@@ -1,7 +1,12 @@
 import { model, Schema } from "mongoose";
-import { Genre, type IBook } from "./book.interface.js";
+import {
+    Genre,
+    type IBook,
+    type IBookMethods,
+    type IBookModel,
+} from "./book.interface.js";
 
-const bookSchema = new Schema<IBook>(
+const bookSchema = new Schema<IBook, IBookModel, IBookMethods>(
     {
         title: {
             type: String,
@@ -54,4 +59,9 @@ const bookSchema = new Schema<IBook>(
     { timestamps: true, versionKey: false },
 );
 
-export const Book = model<IBook>("Book", bookSchema);
+bookSchema.methods.updateAvailability = async function () {
+    this.available = this.copies > 0;
+    await this.save();
+};
+
+export const Book = model<IBook, IBookModel>("Book", bookSchema);
