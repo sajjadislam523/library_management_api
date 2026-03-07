@@ -23,4 +23,4 @@ export interface IBookMethods {
     updateAvailability(): Promise<void>;
 }
 
-export interface IBookModel extends Model<IBook, {}, IBookMethods> {}
+export type IBookModel = Model<IBook, Record<string, never>, IBookMethods>;

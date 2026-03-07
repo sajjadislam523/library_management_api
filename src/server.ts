@@ -1,12 +1,9 @@
 import "dotenv/config";
-import type { Server } from "http";
 import mongoose from "mongoose";
 import dns from "node:dns/promises";
 import app from "./app.js";
 
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
-
-let server: Server;
 
 const PORT = process.env.PORT;
 const DB_USER = process.env.DB_USER;
@@ -19,7 +16,7 @@ async function main() {
         );
         console.log("MongoDB connected successfully");
 
-        server = app.listen(PORT, () => {
+        app.listen(PORT, () => {
             console.log(`Server is listening to ${PORT}`);
         });
     } catch (error) {
