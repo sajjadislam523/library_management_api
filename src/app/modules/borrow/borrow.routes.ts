@@ -3,7 +3,7 @@ import { borrowBook, getBorrowedBooksSummary } from "./borrow.controller.js";
 
 const borrowRouter = Router();
 
-borrowRouter.get("/", borrowBook);
-borrowRouter.post("/", getBorrowedBooksSummary);
+borrowRouter.get("/", getBorrowedBooksSummary);
+borrowRouter.post("/", borrowBook);
 
 export default borrowRouter;

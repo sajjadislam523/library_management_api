@@ -13,6 +13,7 @@ export const getBorrowedBooksSummary = async (
                 $group: {
                     _id: "$book",
                     totalQuantity: { $sum: "$quantity" },
+                    dueDate: { $first: "$dueDate" },
                 },
             },
             {
@@ -32,8 +33,10 @@ export const getBorrowedBooksSummary = async (
                     book: {
                         title: "$book.title",
                         isbn: "$book.isbn",
+                        dueDate: "$dueDate",
                     },
                     totalQuantity: 1,
+                    dueDate: 1,
                 },
             },
         ]);
