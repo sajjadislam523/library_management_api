@@ -1,4 +1,5 @@
 import "dotenv/config";
+import type { Request, Response } from "express";
 import mongoose from "mongoose";
 import dns from "node:dns/promises";
 import app from "./app.js";
@@ -6,22 +7,30 @@ import app from "./app.js";
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 const PORT = process.env.PORT;
-const DB_USER = process.env.DB_USER;
-const DB_PASS = process.env.DB_PASS;
+const DB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.owq8r.mongodb.net/library?appName=Cluster0`;
 
-async function main() {
+let isConnected = false;
+
+async function connectDB() {
+    if (isConnected) return;
+
     try {
-        await mongoose.connect(
-            `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.owq8r.mongodb.net/library?appName=Cluster0`,
-        );
-        console.log("MongoDB connected successfully");
-
-        app.listen(PORT, () => {
-            console.log(`Server is listening to ${PORT}`);
-        });
+        await mongoose.connect(DB_URI);
+        isConnected = true;
+        console.log("MongoDB connected");
     } catch (error) {
-        console.log(error);
+        console.error("DB Connection Error:", error);
+        throw error;
     }
 }
 
-main();
+if (process.env.NODE_ENV !== "production") {
+    connectDB().then(() => {
+        app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+    });
+}
+
+export default async (req: Request, res: Response) => {
+    await connectDB();
+    return app(req, res);
+};
